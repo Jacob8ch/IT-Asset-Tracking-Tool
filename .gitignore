@@ -1,0 +1,54 @@
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Database backups
+*.sql
+*.backup
+
+# Uploads
+uploads/
+
+# SSL certificates
+ssl/
+
+# Dependencies are tracked in respective folders
+# node_modules/ tracked by frontend/.gitignore
+# venv/ tracked by backend/.gitignore
+
+# Docker volumes
+postgres_data/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# Node
+node_modules/
+npm-debug.log
+
+# IDE settings
+.vscode/settings.json
+.idea/workspace.xml

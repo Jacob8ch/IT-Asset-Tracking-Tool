@@ -1,0 +1,80 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: asset_tracker_db
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: secure_password_change_me
+      POSTGRES_DB: asset_tracker
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U admin"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - asset_tracker_net
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: asset_tracker_api
+    environment:
+      DATABASE_URL: postgresql://admin:secure_password_change_me@postgres:5432/asset_tracker
+      JWT_SECRET_KEY: your-super-secret-key-change-this-in-production
+      FLASK_ENV: production
+      FLASK_DEBUG: False
+    ports:
+      - "5000:5000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - ./backend:/app
+      - ./uploads:/app/uploads
+    networks:
+      - asset_tracker_net
+    command: gunicorn -w 4 -b 0.0.0.0:5000 app:create_app()
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: asset_tracker_web
+    environment:
+      REACT_APP_API_URL: http://localhost:5000/api
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    networks:
+      - asset_tracker_net
+    command: npm start
+
+  nginx:
+    image: nginx:alpine
+    container_name: asset_tracker_nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./ssl:/etc/nginx/ssl:ro
+    depends_on:
+      - backend
+      - frontend
+    networks:
+      - asset_tracker_net
+
+volumes:
+  postgres_data:
+
+networks:
+  asset_tracker_net:
+    driver: bridge
