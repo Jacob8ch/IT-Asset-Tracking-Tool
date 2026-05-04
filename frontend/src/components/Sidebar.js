@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../App';
-import { FiMenu, FiX, FiHome, FiPackage, FiBarcode, FiGift, FiPlus, FiUsers, FiLogOut } from 'react-icons/fi';
+import { FiMenu, FiX, FiHome, FiPackage, FiGift, FiPlus, FiUsers, FiLogOut } from 'react-icons/fi';
+import { BsUpcScan } from 'react-icons/bs';
 
 export default function Sidebar() {
   const [isOpen, setIsOpen] = useState(true);
@@ -14,7 +15,7 @@ export default function Sidebar() {
   const menuItems = [
     { path: '/', icon: FiHome, label: 'Dashboard' },
     { path: '/assets', icon: FiPackage, label: 'Assets' },
-    { path: '/scan', icon: FiBarcode, label: 'Scan' },
+    { path: '/scan', icon: BsUpcScan, label: 'Scan' },
     { path: '/loaners', icon: FiGift, label: 'Loaners' },
     { path: '/tickets', icon: FiPlus, label: 'Tickets' },
     ...(user?.role === 'admin' ? [{ path: '/admin', icon: FiUsers, label: 'Admin' }] : []),

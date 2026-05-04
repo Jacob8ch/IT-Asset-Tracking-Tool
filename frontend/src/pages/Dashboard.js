@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { assetService, ticketService } from '../services/api';
-import { FiBarcode, FiGift, FiPlus, FiPackage, FiTrendingUp, FiAlertCircle } from 'react-icons/fi';
+import { FiGift, FiPlus, FiPackage, FiTrendingUp, FiAlertCircle } from 'react-icons/fi';
+import { BsUpcScan } from 'react-icons/bs';
 
 export default function Dashboard() {
   const [stats, setStats] = useState({
@@ -76,7 +77,7 @@ export default function Dashboard() {
           </h3>
           <div className="space-y-3">
             <a href="/scan" className="block glass-button text-center py-2 text-sm">
-              <FiBarcode className="inline mr-2" size={16} />
+              <BsUpcScan className="inline mr-2" size={16} />
               Scan Asset
             </a>
             <a href="/assets" className="block glass-button-secondary text-center py-2 text-sm">
