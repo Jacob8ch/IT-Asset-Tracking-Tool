@@ -11,7 +11,7 @@ module.exports = {
         'primary': '#0066FF',
         'primary-dark': '#0052CC',
       },
-      backdropFilter: {
+      backdropBlur: {
         'glass': 'blur(10px)',
       },
       boxShadow: {
