@@ -42,8 +42,8 @@ services:
 
   frontend:
     build:
-      context: ./frontend
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: frontend/Dockerfile
     container_name: asset_tracker_web
     environment:
       REACT_APP_API_URL: http://localhost:5000/api
