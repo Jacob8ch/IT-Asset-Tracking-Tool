@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { assetService, ticketService } from '../services/api';
-import { FiBarcode2, FiGift, FiTicket, FiPackage, FiTrendingUp, FiAlertCircle } from 'react-icons/fi';
+import { FiBarcode, FiGift, FiPlus, FiPackage, FiTrendingUp, FiAlertCircle } from 'react-icons/fi';
 
 export default function Dashboard() {
   const [stats, setStats] = useState({
@@ -63,7 +63,7 @@ export default function Dashboard() {
         <StatCard icon={FiPackage} label="Total Assets" value={stats.totalAssets} color="blue" />
         <StatCard icon={FiAlertCircle} label="In Repair" value={stats.assetsInRepair} color="orange" />
         <StatCard icon={FiGift} label="Active Loaners" value={stats.activeLoaners} color="green" />
-        <StatCard icon={FiTicket} label="Open Tickets" value={stats.openTickets} color="red" />
+        <StatCard icon={FiPlus} label="Open Tickets" value={stats.openTickets} color="red" />
       </div>
 
       {/* Main Content Grid */}
@@ -76,7 +76,7 @@ export default function Dashboard() {
           </h3>
           <div className="space-y-3">
             <a href="/scan" className="block glass-button text-center py-2 text-sm">
-              <FiBarcode2 className="inline mr-2" size={16} />
+              <FiBarcode className="inline mr-2" size={16} />
               Scan Asset
             </a>
             <a href="/assets" className="block glass-button-secondary text-center py-2 text-sm">
@@ -84,7 +84,7 @@ export default function Dashboard() {
               View Inventory
             </a>
             <a href="/tickets" className="block glass-button-secondary text-center py-2 text-sm">
-              <FiTicket className="inline mr-2" size={16} />
+              <FiPlus className="inline mr-2" size={16} />
               Create Ticket
             </a>
             <a href="/loaners" className="block glass-button-secondary text-center py-2 text-sm">
